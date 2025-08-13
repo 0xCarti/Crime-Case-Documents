@@ -1,126 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<title>Game Master File — Case 1 (and Series Overview)</title>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<style>
-  @page { size: Letter; margin: 0.6in; }
-  body { font-family: Georgia, serif; color:#1a1a1a; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  h1,h2,h3{ margin:0 0 8px 0; }
-  .page{ page-break-after:always; }
-  .small{ font-size:12px; color:#555; }
-  ul{ margin:6px 0 12px 18px; }
-  .card{ border:1px solid #bbb; padding:10px; border-radius:6px; margin:8px 0; }
-  .grid{ display:grid; gap:10px; grid-template-columns: 1fr 1fr; }
-  .mono{ font-family:"Courier New", Courier, monospace; font-size:12px; }
-</style>
+  <meta charset="utf-8" />
+  <title>Case File 1 — Halden Death (Closed as Suicide) — Expanded</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* --- Global Print & Theme --- */
+    @page { size: Letter; margin: 0.6in; }
+    :root { --ink:#111; --muted:#454545; --line:#555; --accent:#0a3e91; --stamp:#b21e22; --row:#f4f4f4; }
+    body { color:var(--ink); font-family:"Times New Roman", Times, serif; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .page{ page-break-after:always; position:relative; }
+    .cap{ letter-spacing:.04em; text-transform:none; }
+    .rule{ height:2px; background:var(--accent); margin:6px 0 12px; }
+    .small{ font-size:12px; color:var(--muted); }
+    .tiny{ font-size:10px; color:var(--muted); }
+    .mono{ font-family:"Courier New", Courier, monospace; }
+    .box{ border:1px solid var(--line); padding:8px; border-radius:2px; }
+    .grid{ display:grid; gap:8px; }
+    .flex{ display:flex; gap:8px; align-items:center; }
+    .space{ justify-content:space-between; }
+    .two-col{ column-count:2; column-gap:22px; }
+    .watermark{ position:absolute; inset:0; pointer-events:none; display:grid; place-items:center; opacity:.06; font-size:120px; font-weight:800; }
+    .mt8{margin-top:8px} .mt12{margin-top:12px}
+
+    /* --- Tables with full borders --- */
+    table { width:100%; border-collapse:collapse; }
+    th,td { border:1px solid var(--line); padding:6px; font-size:12px; vertical-align:top; }
+    th { background:var(--row); }
+    tbody tr:nth-child(odd){ background:#fff; }
+    tbody tr:nth-child(even){ background:#fafafa; }
+
+    /* Section badges */
+    .badge{ font-size:12px; border:1px solid var(--line); padding:2px 6px; border-radius:3px; }
+
+    /* Handwriting (for cursive inserts if needed) */
+    .scribble { font-family:"Brush Script MT", "Segoe Script", "Homemade Apple", cursive; font-size:20px; line-height:28px; color:#222; }
+
+    /* --- PRINT BORDER FIX (force visible borders in print) --- */
+    @media print {
+      :root { --line:#000 !important; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      table { border-collapse: separate !important; border-spacing: 0 !important; }
+      table, th, td { border: 0.75pt solid #000 !important; }
+      th { background: #efefef !important; }
+      .box, .badge { border: 0.75pt solid #000 !important; }
+      table, thead, tbody, tr, td, th { page-break-inside: avoid !important; }
+    }
+  </style>
 </head>
 <body>
 
-<section class="page">
-  <h1>Game Master Brief — Case 1 & Series Overview</h1>
-  <p class="small">Confidential. Do not include in player folders.</p>
-  <h2>Premise</h2>
-  <p>Players are private investigators hired by a third party after police close multiple seemingly unrelated cases. Their goal is to link the cases, establish motive and method, and identify the hidden culprit. The true culprit appears in the documents but is not labeled as a suspect.</p>
+  <!-- 1. COVER SHEET -->
+  <section class="page">
+    <div class="watermark">BPS</div>
+    <div class="flex space">
+      <div>
+        <h1 class="cap">BRANDON POLICE SERVICE</h1>
+        <div class="small">Crime Scene Unit • 1234 9th St, Brandon, MB • (204) 555-0199</div>
+      </div>
+      <div class="badge mono">Case No: BPS-25-0911</div>
+    </div>
+    <div class="rule"></div>
 
-  <h2>Series at a Glance (4–5 Cases)</h2>
-  <ul>
-    <li><strong>Case 1 — Halden Death:</strong> Apparent suicide of real estate magnate Martin Halden. Actually a murder staged by CTO <em>Daniel Cross</em>, motivated by exposure of a fraud scheme (archival hardware & off-books data).</li>
-    <li><strong>Case 2 — Evergreen Antiques Burglary:</strong> Mid-level theft with odd item selection. Connects via resale channel and a DVR gap.</li>
-    <li><strong>Case 3 — Warehouse Arson (Fraud Cover-up):</strong> Fire destroys storage unit B-17 holding HRG archives. Insurance and IT work orders link to Case 1 vendor trail.</li>
-    <li><strong>Case 4 — Side Case / Red Herring:</strong> Looks connected but mostly noise; contains one or two real signals that tie back to Cross (e.g., shared VPN endpoint, shared phone contact).</li>
-  </ul>
+    <div class="grid" style="grid-template-columns: 2fr 1fr 1fr;">
+      <div class="box"><strong>Case Title:</strong> Death of Martin HALDEN (Closed as Suicide)</div>
+      <div class="box"><strong>Date Opened:</strong> 2025-08-11</div>
+      <div class="box"><strong>Date Closed:</strong> 2025-08-18</div>
+    </div>
 
-  <h2>Win Condition</h2>
-  <p>Players present a coherent hypothesis (method + motive + linkage across cases) and confidently open the envelope naming the culprit: <strong>Daniel Cross</strong>.</p>
-</section>
+    <div class="grid mt8" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="box"><strong>Primary Detective:</strong> Det. Alan BROOKS #287</div>
+      <div class="box"><strong>CSU Lead:</strong> Sgt. L. PETERS #102</div>
+      <div class="box"><strong>ME File Ref:</strong> ME-25-1182</div>
+    </div>
 
-<section class="page">
-  <h2>Case 1 — Organization Map</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Folder Sections (as given to players)</h3>
-      <ul>
-        <li>Administrative & Incident Reports</li>
-        <li>Forensics & Scene Docs</li>
-        <li>Witness & Interview Records</li>
-        <li>Digital & Call Data</li>
-        <li>Media & Closure</li>
-        <li>Photo Index (separate full-page photos)</li>
+    <div class="box mt12 small">
+      <strong>Contents:</strong> Initial Incident; Supplemental Reports (2); Crime Scene Log; Scene Diagram; 
+      <u>Property/Evidence Log (combined)</u>; Ballistics; GSR; <u>Autopsy/Toxicology (with TOD)</u>; Fingerprint Sheet; Interviews (Ward, Cross, Housekeeper, Neighbor); 
+      Digital Forensics; <u>IT Security — VPN Access Logs</u>; Call Records (combined); Bank Transactions; Media; Closure; Photo Index.
+    </div>
+  </section>
+
+  <!-- 2. INITIAL INCIDENT REPORT -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">INCIDENT REPORT</h2><div class="badge mono">BPS-25-0911-IR</div></div>
+    <div class="rule"></div>
+
+    <div class="grid" style="grid-template-columns: 2fr 1fr 1fr;">
+      <div class="box"><strong>Location:</strong> 55 Waverly Ct, Brandon, MB</div>
+      <div class="box"><strong>Date/Time Reported:</strong> 2025-08-11 22:06</div>
+      <div class="box"><strong>Occurred:</strong> 2025-08-11 ~21:30–22:00</div>
+    </div>
+
+    <div class="grid mt8" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="box"><strong>Reporting Officer:</strong> PC M. HOLLOWAY #417</div>
+      <div class="box"><strong>Detective:</strong> Det. A. BROOKS #287</div>
+      <div class="box"><strong>Supervisor:</strong> Sgt. L. PETERS #102</div>
+    </div>
+
+    <div class="box mt12">
+      <strong>Narrative:</strong>
+      <div class="small" style="line-height:1.45;">
+        On arrival, made contact with housekeeper, Maria LOPEZ, at front entry. LOPEZ reported she arrived at approx. 21:58 hrs and found the door unlocked. Officers conducted protective sweep; no persons located. The study was observed with desk lamp on, decedent seated, head canted to right, revolver in right hand. Pooling blood noted under chair; staining consistent with low-velocity drip at desk edge. Wastebasket adjacent contained torn paper fragments. No forced entry; windows latched. CSU notified at 22:14 hrs and secured scene at 22:22 hrs. Photos logged (see index). Items collected per Property/Evidence Log. Residence turned over to Det. BROOKS at 23:05 hrs.
+      </div>
+    </div>
+
+    <div class="grid mt12" style="grid-template-columns: 1fr 1fr;">
+      <div class="box"><strong>Initial Observations (CSU):</strong>
+        <ul class="small" style="margin:8px 0 0 18px;">
+          <li>GSR swabs collected both hands; preliminary positive L hand.</li>
+          <li>Livor mortis posterior; partial fixation; seated angle may not reflect initial position.</li>
+          <li>Desk drawers undisturbed; safe locked; no pry/tool marks.</li>
+          <li>Whiskey bottle at ~1/3 volume; glass with residue on rim.</li>
+        </ul>
+      </div>
+      <div class="box"><strong>Victim Info:</strong>
+        <ul class="small" style="margin:8px 0 0 18px;">
+          <li>Name: HALDEN, Martin • DOB 1967-02-03</li>
+          <li>Occupation: Owner, Halden Realty Group</li>
+          <li>Medical: Atenolol per prescription in cabinet</li>
+          <li>Next of Kin: Through attorney Jonathan GREER</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SUPPLEMENTAL REPORT — PATROL #2 -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">SUPPLEMENTAL REPORT — PATROL</h2><div class="badge mono">BPS-25-0911-SUP-A</div></div>
+    <div class="rule"></div>
+    <div class="box small two-col">
+      <strong>PC R. SANTOS #233:</strong> Assisted on call. Checked rear patio door (secure). Noted porch light on timer; trash bins at curb (collection Tue). Cat observed in kitchen; food bowls full. Spoke briefly with neighbor R. HATHAWAY (55 Waverly Ct, unit 3) re: loud "crack" around 21:30 hrs; he believed it was a car backfire. No vehicles seen leaving at high speed.
+      <br/><br/>
+      Conducted canvass northbound 50m; no CCTV at residences. One doorbell camera at 51 Waverly Ct inoperative (owner out of town). CSU requested to dust door handles; negative ridge detail (gloves likely). No further.
+    </div>
+  </section>
+
+  <!-- 4. SUPPLEMENTAL REPORT — PATROL #3 -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">SUPPLEMENTAL REPORT — PATROL</h2><div class="badge mono">BPS-25-0911-SUP-B</div></div>
+    <div class="rule"></div>
+    <div class="box small two-col">
+      <strong>PC A. LOEWEN #198:</strong> Assisted perimeter. Observed mailbox at curb with delivered mail (postmarked 2025-08-10). Front rug damp at edges consistent with rain earlier. Noted faint shoe scuff at study threshold (pattern indistinct). Assisted CSU with item bagging.
+      <br/><br/>
+      Statement from LOPEZ taken on scene; she last saw decedent 2025-08-10 when she cleaned. No visitors reported. Garage door closed; vehicles accounted for (1 sedan, 1 SUV registered to decedent). No further.
+    </div>
+  </section>
+
+  <!-- 5. CRIME SCENE LOG -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">CRIME SCENE ENTRY LOG</h2><div class="badge mono">BPS-25-0911-CSL</div></div>
+    <div class="rule"></div>
+    <table class="tiny mono">
+      <thead><tr><th>Time</th><th>Name / ID</th><th>Role</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>22:06</td><td>PC M. Holloway #417</td><td>Patrol</td><td>Initial entry, sweep</td></tr>
+        <tr><td>22:08</td><td>PC R. Santos #233</td><td>Patrol</td><td>Perimeter</td></tr>
+        <tr><td>22:10</td><td>PC A. Loewen #198</td><td>Patrol</td><td>Perimeter</td></tr>
+        <tr><td>22:14</td><td>Sgt. L. Peters #102</td><td>CSU Lead</td><td>Scene command</td></tr>
+        <tr><td>22:16</td><td>Tech K. Freeman</td><td>CSU</td><td>Photography</td></tr>
+        <tr><td>22:22</td><td>Det. A. Brooks #287</td><td>Detective</td><td>Case lead</td></tr>
+        <tr><td>22:28</td><td>Tech R. Cho</td><td>CSU</td><td>Latents</td></tr>
+        <tr><td>22:34</td><td>Tech J. O'Neal</td><td>CSU</td><td>GSR swabs</td></tr>
+        <tr><td>23:05</td><td>ME Transport</td><td>Coroner</td><td>Body removal</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6. SCENE DIAGRAM (TEXT DESCR) -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">SCENE DIAGRAM — DESCRIPTION</h2><div class="badge mono">BPS-25-0911-SD</div></div>
+    <div class="rule"></div>
+    <div class="small">
+      Ground floor office (3.9m x 4.6m). Door on south wall opens inward; desk centered facing north wall window. Chair behind desk; decedent seated. Wastebasket east side of desk. Bookshelves along west wall. Evidence markers: #1 revolver (desk right), #2 whiskey bottle (desk left), #3 note fragments (wastebasket), #4 laptop (desk center). No blood spatter on north wall; small back spatter on desk blotter.
+    </div>
+  </section>
+
+  <!-- 7. PROPERTY & EVIDENCE LOG — COMBINED (ONE PAGE) -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">PROPERTY / EVIDENCE LOG — Combined</h2><div class="badge mono">BPS-25-0911-PEL</div></div>
+    <div class="rule"></div>
+    <table class="mono tiny">
+      <thead>
+        <tr>
+          <th style="width:48px;">Item #</th>
+          <th>Description</th>
+          <th style="width:62px;">Collected By</th>
+          <th style="width:86px;">Date</th>
+          <th style="width:60px;">Time</th>
+          <th style="width:90px;">Loc.</th>
+          <th>Chain of Custody</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>001</td><td>.38 revolver, SN 2F71-8891</td><td>#417</td><td>2025-08-11</td><td>22:18</td><td>Desk</td><td>CSU → Firearms</td></tr>
+        <tr><td>002</td><td>Whiskey bottle + glass</td><td>#417</td><td>2025-08-11</td><td>22:21</td><td>Desk</td><td>CSU → Property</td></tr>
+        <tr><td>003</td><td>Torn note fragments (8 pcs)</td><td>#417</td><td>2025-08-11</td><td>22:26</td><td>Wastebasket</td><td>CSU → Latents</td></tr>
+        <tr><td>004</td><td>Laptop 15" silver</td><td>#417</td><td>2025-08-11</td><td>22:28</td><td>Desk</td><td>CSU → Digital</td></tr>
+        <tr><td>005</td><td>Keyring (3 keys)</td><td>#233</td><td>2025-08-11</td><td>22:35</td><td>Hall table</td><td>CSU → Property</td></tr>
+        <tr><td>006</td><td>Wallet, contents</td><td>#198</td><td>2025-08-11</td><td>22:37</td><td>Jacket pocket</td><td>CSU → Property</td></tr>
+        <tr><td>007</td><td>Phone charger</td><td>#233</td><td>2025-08-11</td><td>22:39</td><td>Desk</td><td>CSU → Property</td></tr>
+        <tr><td>008</td><td>Desk blotter (blood spatter)</td><td>#417</td><td>2025-08-11</td><td>22:42</td><td>Desk</td><td>CSU → Lab</td></tr>
+        <tr><td>009</td><td>Mail (3 envelopes)</td><td>#198</td><td>2025-08-11</td><td>22:44</td><td>Foyer</td><td>CSU → Property</td></tr>
+        <tr><td>010</td><td>Pen w/ residue</td><td>#233</td><td>2025-08-11</td><td>22:46</td><td>Desk</td><td>CSU → Latents</td></tr>
+        <tr><td>011</td><td>Carpet fiber sample</td><td>#417</td><td>2025-08-11</td><td>22:49</td><td>Under chair</td><td>CSU → Lab</td></tr>
+        <tr><td>012</td><td>Door threshold swab</td><td>#233</td><td>2025-08-11</td><td>22:51</td><td>Study entry</td><td>CSU → Lab</td></tr>
+        <tr><td>013</td><td>Safe keypad swab</td><td>#198</td><td>2025-08-11</td><td>22:54</td><td>Study</td><td>CSU → Latents</td></tr>
+        <tr><td>014</td><td>Glasses (reading)</td><td>#417</td><td>2025-08-11</td><td>22:56</td><td>Desk</td><td>CSU → Property</td></tr>
+      </tbody>
+    </table>
+    <div class="tiny mt8">Note: “Chain of Custody” entries reflect initial transfer only; see Property System for subsequent movements.</div>
+  </section>
+
+  <!-- 8. FORENSICS — FIREARMS/BALLISTICS (UPDATED OWNER/REGISTRATION) -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">FORENSICS — FIREARMS/BALLISTICS</h2><div class="badge mono">BPS-25-0911-FB</div></div>
+    <div class="rule"></div>
+    <div class="grid" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="box"><strong>Firearm:</strong> .38 Special revolver (SN 2F71-8891)</div>
+      <div class="box"><strong>Registration Status:</strong> <u>Unregistered</u> (CFP query: negative)</div>
+      <div class="box"><strong>Possessor:</strong> Found with decedent</div>
+    </div>
+    <div class="grid mt8" style="grid-template-columns: 1fr 1fr;">
+      <div class="box"><strong>Licensing Check:</strong><br/>
+        <span class="small">No PAL/RPAL on file for HALDEN, Martin (DOB 1967-02-03). Firearm possession status: unlawful pending source determination.</span>
+      </div>
+      <div class="box"><strong>Cartridge:</strong><br/><span class="small">.38 SPL +P</span></div>
+    </div>
+    <div class="box mt12">
+      <strong>Results:</strong>
+      <ul class="small" style="margin:8px 0 0 18px;">
+        <li>Test-fired; rifling marks match recovered projectile.</li>
+        <li>Latents: partial on cylinder consistent with E. Ward; no ridge detail on grip (wipe patterns).</li>
+        <li>Muzzle-to-target: contact to 3 cm (stippling pattern consistent).</li>
       </ul>
     </div>
-    <div class="card">
-      <h3>Key People</h3>
-      <ul>
-        <li><strong>Martin Halden</strong> — Victim, HRG owner.</li>
-        <li><strong>Evelyn Ward</strong> — CFO; prints on cylinder explainable.</li>
-        <li><strong>Daniel Cross</strong> — CTO; staged suicide; remote session + data purge.</li>
-        <li><strong>Maria Lopez</strong> — Housekeeper; door unlocked anomaly.</li>
-        <li><strong>R. Hathaway</strong> — Neighbor; heard “crack,” car door.</li>
-        <li><strong>Jonathan Greer</strong> — Lawyer; referenced by victim.</li>
+  </section>
+
+  <!-- 9. FORENSICS — GUNSHOT RESIDUE -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">FORENSICS — GUNSHOT RESIDUE</h2><div class="badge mono">BPS-25-0911-GSR</div></div>
+    <div class="rule"></div>
+    <table class="tiny mono">
+      <thead><tr><th>Sample</th><th>Result</th><th>Particle Count (PbBaSb)</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Left hand — dorsum</td><td>Positive</td><td>21</td><td>Concentrated thumb/index</td></tr>
+        <tr><td>Left hand — palm</td><td>Trace</td><td>4</td><td>—</td></tr>
+        <tr><td>Right hand — dorsum</td><td>Negative</td><td>0</td><td>—</td></tr>
+        <tr><td>Right hand — palm</td><td>Negative</td><td>0</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="tiny mt8">Interpretation: Distribution inconsistent with right-hand self-infliction.</div>
+  </section>
+
+  <!-- 10. MEDICAL EXAMINER — AUTOPSY & TOXICOLOGY (ADDED TOD) -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">MEDICAL EXAMINER — AUTOPSY & TOXICOLOGY</h2><div class="badge mono">ME-25-1182</div></div>
+    <div class="rule"></div>
+    <div class="box small">
+      <strong>Autopsy Summary:</strong>
+      <ul style="margin:8px 0 0 18px;">
+        <li>Single contact/near-contact GSW to right temporal region.</li>
+        <li>Lividity posterior; partial fixation inconsistent with final seated position.</li>
+        <li>No defensive injuries; nails intact.</li>
+        <li><strong>Estimated Time of Death (TOD):</strong> <u>2025-08-11, 21:50 ± 10 minutes (CDT)</u>, based on rectal temperature decline, gastric contents, and lividity onset.</li>
       </ul>
     </div>
-  </div>
+    <div class="box small mt12">
+      <strong>Toxicology:</strong>
+      <ul style="margin:8px 0 0 18px;">
+        <li>BAC: 0.03%.</li>
+        <li>Negative for illicit substances; positive for atenolol (therapeutic).</li>
+        <li>Benzodiazepine screen trace (below reporting threshold) — clinical significance uncertain.</li>
+      </ul>
+    </div>
+    <div class="tiny mt8">Correlation note: TOD window overlaps corporate VPN activity recorded 21:58–22:03 on HRG-VPN-GW01 (see IT Security log).</div>
+  </section>
 
-  <div class="card">
-    <h3>Evidence Index (Case 1)</h3>
-    <ul>
-      <li><em>Weapon & Ballistics:</em> .38 revolver; muzzle-to-target 0–3 cm; prints inconclusive on grip; Ward partial on cylinder (innocuous).</li>
-      <li><em>GSR:</em> Positive on <strong>left</strong> hand dorsum; inconsistent with right-hand suicide staging.</li>
-      <li><em>Autopsy/Tox:</em> Low BAC; trace benzo below threshold (possible pre-sedation).</li>
-      <li><em>Digital:</em> VPN session 21:58–22:03; 4.2 GB purge; vendor “North Prairie Systems” in headers.</li>
-      <li><em>Call Log:</em> Multiple calls with Cross; call to lawyer; spam/ordinary calls as noise.</li>
-      <li><em>Paper Trail:</em> Invoice, check stub, ledger entries referencing North Prairie; IT work order signed by Cross.</li>
-      <li><em>Scene:</em> Torn note fragments; door unlocked; threshold scuff; safe keypad wiped.</li>
-    </ul>
-  </div>
+  <!-- 11. FINGERPRINT COMPARISON SHEET -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">LATENT PRINT COMPARISON</h2><div class="badge mono">BPS-25-0911-LP</div></div>
+    <div class="rule"></div>
+    <table class="tiny mono">
+      <thead><tr><th>Location</th><th>Lift ID</th><th>Result</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Desk blotter</td><td>LP-01</td><td>Inconclusive</td><td>Smudged</td></tr>
+        <tr><td>Whiskey glass</td><td>LP-02</td><td>Match — Halden</td><td>Ridge clear</td></tr>
+        <tr><td>Revolver cylinder</td><td>LP-03</td><td>Partial — E. Ward</td><td>Explained as post-incident handling</td></tr>
+        <tr><td>Safe keypad</td><td>LP-04</td><td>Negative</td><td>Wiped</td></tr>
+        <tr><td>Study door handle</td><td>LP-05</td><td>Partial — Unknown</td><td>Insufficient for AFIS</td></tr>
+      </tbody>
+    </table>
+  </section>
 
-  <div class="card">
-    <h3>Clue Map (GM Eyes Only)</h3>
-    <ul>
-      <li>Real tells: GSR left-hand heavy; VPN session overlapping TOD; deletions immediately prior to discovery; invoice trail; access logs with Cross at server room.</li>
-      <li>Red herrings: Paint receipt (unrelated), neighbor misattributes gunshot to backfire, media article framing suicide, charity disbursement noise.</li>
-      <li>Pacing: Most strong clues are split between Forensics, Digital, and Financial inserts.</li>
-    </ul>
-  </div>
-</section>
+  <!-- 12. INTERVIEW — EVELYN WARD -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">INTERVIEW TRANSCRIPT — EVELYN WARD (CFO)</h2><div class="badge mono">BPS-25-0911-INT-EW</div></div>
+    <div class="rule"></div>
+    <div class="small">
+      <strong>Date/Time:</strong> 2025-08-12 14:10 • <strong>Location:</strong> BPS Interview Room B • <strong>Present:</strong> Det. Brooks, Ofc. Santos<br/><br/>
+      <em>Q:</em> Please state your full name, age, and address for the record.<br/>
+      <em>A (Ward):</em> Evelyn Marie Ward, forty-six, 18 Pineview Lane, Brandon.<br/><br/>
+      <em>Q:</em> Occupation and relationship to Mr. Halden?<br/>
+      <em>A:</em> Chief Financial Officer at Halden Realty Group. I reported directly to Martin. We worked together for nine years.<br/><br/>
+      <em>Q:</em> When did you last see him alive?<br/>
+      <em>A:</em> Sunday afternoon. I dropped off some files. He seemed tired, distracted.<br/><br/>
+      <em>Q:</em> Did he discuss finances or pending investigations?<br/>
+      <em>A:</em> He said the rumors were overwhelming. He didn’t get into details.<br/><br/>
+      <em>Q:</em> Did you handle any items at the residence last night?<br/>
+      <em>A:</em> After officers arrived, I helped gather a few personal items. I may have touched the firearm when we were talking about the safe. I realize that was inappropriate.<br/><br/>
+      <em>Q:</em> How long have you known Mr. Halden personally—outside work?<br/>
+      <em>A:</em> We attended charity events together, company functions. We weren’t close friends, just colleagues.<br/><br/>
+      <em>Q:</em> What did you have for dinner last night?<br/>
+      <em>A:</em> A salad at home. I wasn’t feeling well.<br/><br/>
+      <em>Q:</em> Hobbies or routines we should know about that could explain any items in his office?<br/>
+      <em>A:</em> Martin kept meticulous notes, liked fountain pens, strong tea in the evening. Nothing unusual.<br/><br/>
+      <em>Q:</em> Anyone he mentioned by name recently?<br/>
+      <em>A:</em> He called Daniel a couple times about computer syncing. That’s all I recall.<br/><br/>
+      <em>Q:</em> Anything else?<br/>
+      <em>A:</em> I’m worried this will define his legacy. He did a lot of good.
+    </div>
+  </section>
 
-<section class="page">
-  <h2>Cross-Case Linkage (for GM)</h2>
-  <ul>
-    <li><strong>Vendor Thread:</strong> “North Prairie Systems” recurs in Case 1 financials and Case 3 warehouse equipment manifests.</li>
-    <li><strong>Access/Timing Thread:</strong> DVR gaps in Case 2 align with times Cross is remoted in (same VPN gateway string shows up).</li>
-    <li><strong>Phone/Contact Thread:</strong> One common contact appears across CDRs (burner or store number) — reveal in later cases.</li>
-  </ul>
+  <!-- 13. INTERVIEW — DANIEL CROSS -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">INTERVIEW TRANSCRIPT — DANIEL CROSS (CTO)</h2><div class="badge mono">BPS-25-0911-INT-DC</div></div>
+    <div class="rule"></div>
+    <div class="small">
+      <strong>Date/Time:</strong> 2025-08-12 15:40 • <strong>Location:</strong> BPS Interview Room C • <strong>Present:</strong> Det. Brooks, Ofc. Loewen<br/><br/>
+      <em>Q:</em> Name, age, address?<br/>
+      <em>A (Cross):</em> Daniel Everett Cross, forty-two, 9 Cedar Heights, Brandon.<br/><br/>
+      <em>Q:</em> Occupation and relationship to Mr. Halden?<br/>
+      <em>A:</em> Chief Technology Officer at Halden Realty Group. I manage IT infrastructure. I met Martin eight years ago when I joined.<br/><br/>
+      <em>Q:</em> Contact with him on the night in question?<br/>
+      <em>A:</em> He called me twice about laptop syncing. I returned one call around nine-fifteen. I was home, remoting into the office that evening.<br/><br/>
+      <em>Q:</em> Do you routinely remote in after hours?<br/>
+      <em>A:</em> Yes. Maintenance windows, backups—pretty normal.<br/><br/>
+      <em>Q:</em> Dinner last night?<br/>
+      <em>A:</em> Leftover pasta. Nothing fancy.<br/><br/>
+      <em>Q:</em> How well did you know Martin personally?<br/>
+      <em>A:</em> We weren’t close socially. Strictly professional. He trusted me with tech decisions.<br/><br/>
+      <em>Q:</em> Any reason he’d harm himself?<br/>
+      <em>A:</em> Stress. Media pressure. He hated rumors.<br/><br/>
+      <em>Q:</em> Anything that would explain deleted files on his laptop?<br/>
+      <em>A:</em> Hard to say without forensics. Sometimes users panic and clear things. IT can try recovery.<br/><br/>
+      <em>Q:</em> Hobbies, routines?<br/>
+      <em>A:</em> Running, guitar. I log into VPN most nights to check systems.<br/><br/>
+      <em>Q:</em> Anything else you want to add?<br/>
+      <em>A:</em> I hope the family finds peace.
+    </div>
+  </section>
 
-  <h3>What Players Might Miss</h3>
-  <ul>
-    <li>GSR handedness mismatch if they don’t compare to right/left dominance.</li>
-    <li>Header cache line in Digital Forensics pointing to vendor.</li>
-    <li>Ledger “capitalization adjustment” matching invoice total.</li>
-  </ul>
+  <!-- 14. INTERVIEW — HOUSEKEEPER -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">INTERVIEW TRANSCRIPT — MARIA LOPEZ (Housekeeper)</h2><div class="badge mono">BPS-25-0911-INT-ML</div></div>
+    <div class="rule"></div>
+    <div class="small">
+      <strong>Date/Time:</strong> 2025-08-11 22:25 • <strong>Location:</strong> Scene • <strong>Present:</strong> PC Holloway<br/><br/>
+      <em>Q:</em> Name, age, address?<br/>
+      <em>A:</em> Maria Elena Lopez, fifty-one, 12 Oak Street.<br/><br/>
+      <em>Q:</em> How long have you worked for Mr. Halden?<br/>
+      <em>A:</em> Six years. Mondays and Thursdays. He was tidy.<br/><br/>
+      <em>Q:</em> When did you arrive tonight?<br/>
+      <em>A:</em> Close to ten. The door was unlocked. That is not normal.<br/><br/>
+      <em>Q:</em> What did you do?<br/>
+      <em>A:</em> I called his name, waited outside, called the non-emergency line.<br/><br/>
+      <em>Q:</em> Notice anything unusual this week?<br/>
+      <em>A:</em> He kept the study door closed. He didn’t finish his tea on Sunday, which he always does.<br/><br/>
+      <em>Q:</em> Hobbies or routines?<br/>
+      <em>A:</em> He listened to old jazz when he worked. He organized receipts in a little tray.<br/><br/>
+      <em>Q:</em> Anything else?<br/>
+      <em>A:</em> No. I’m sorry.
+    </div>
+  </section>
 
-  <h3>Failsafes / Hints You Can Offer</h3>
-  <ul>
-    <li>“Compare the hands and the residue.”</li>
-    <li>“Follow the vendor names across documents.”</li>
-    <li>“Why would someone wipe a keypad they own?”</li>
-  </ul>
-</section>
+  <!-- 15. INTERVIEW — NEIGHBOR -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">INTERVIEW TRANSCRIPT — R. HATHAWAY (Neighbor)</h2><div class="badge mono">BPS-25-0911-INT-RH</div></div>
+    <div class="rule"></div>
+    <div class="small">
+      <strong>Date/Time:</strong> 2025-08-12 09:05 • <strong>Location:</strong> 55 Waverly Ct sidewalk • <strong>Present:</strong> PC Santos<br/><br/>
+      <em>Q:</em> Name, age, address?<br/>
+      <em>A:</em> Richard James Hathaway, sixty-three, Unit 3, 55 Waverly Court.<br/><br/>
+      <em>Q:</em> Sounds heard?<br/>
+      <em>A:</em> A car door, then maybe fifteen seconds later a sharp crack. Could’ve been a backfire. Street stayed quiet.<br/><br/>
+      <em>Q:</em> Visitors earlier?<br/>
+      <em>A:</em> Delivery van around five. I was watching the game after that.<br/><br/>
+      <em>Q:</em> How long have you known Mr. Halden?<br/>
+      <em>A:</em> We exchanged waves for years. He kept to himself.<br/><br/>
+      <em>Q:</em> What did you have for dinner last night?<br/>
+      <em>A:</em> Frozen lasagna. Not great.<br/><br/>
+      <em>Q:</em> Anything else?<br/>
+      <em>A:</em> No, sir.
+    </div>
+  </section>
 
-<section class="page">
-  <h2>Production Checklist (Case 1)</h2>
-  <ul>
-    <li>Print Case File 1 (~20 pages) single-sided.</li>
-    <li>Print “Printable Inserts” pack; rough-up, fold, add coffee ring; photograph for Photo Index items as needed.</li>
-    <li>Insert your Sora-generated photos (or staged photos) as full-page prints after the Photo Index.</li>
-    <li>Seal final answer envelope labeled “Solution — Open When Ready.”</li>
-  </ul>
+  <!-- 16. DIGITAL FORENSICS — LAPTOP (shows VPN window) -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">DIGITAL FORENSICS — LAPTOP EXAMINATION</h2><div class="badge mono">BPS-25-0911-DF</div></div>
+    <div class="rule"></div>
+    <div class="grid" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="box"><strong>Device:</strong> Laptop 15" (Item 004)</div>
+      <div class="box"><strong>OS:</strong> Windows 11 Pro</div>
+      <div class="box"><strong>Examiner:</strong> Tech Unit</div>
+    </div>
+    <div class="box small mt12">
+      <strong>Findings:</strong>
+      <ul style="margin:8px 0 0 18px;">
+        <li>Last login: 20:54 (user mhalden).</li>
+        <li><strong>Remote session: 21:58–22:03 via HRG-VPN-GW01.</strong> Session metadata unavailable (log rotation).</li>
+        <li>Deletions: ~4.2 GB purged 22:01–22:04; partial overwrite detected.</li>
+        <li>Recovered headers reference vendor "North Prairie Systems" (see Financials).</li>
+      </ul>
+    </div>
+    <div class="tiny mt8">Conclusion (Official): Deletions likely user-initiated prior to death.</div>
+  </section>
 
-  <h2>Answer Envelope — Canon Solution</h2>
-  <p class="mono">Culprit: DANIEL CROSS (CTO).<br/>Method: Staged suicide after remote session & data purge; tampered prints; left-hand GSR inconsistency.<br/>Motive: Exposure of fraud trail (archive hardware + off-books data) tying him to vendor kickbacks.</p>
-</section>
+  <!-- 17. IT SECURITY — VPN ACCESS LOG (with Cross line) -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">IT SECURITY — CORPORATE VPN ACCESS LOG (EXPORT)</h2><div class="badge mono">BPS-25-0911-ITV</div></div>
+    <div class="rule"></div>
+    <table class="mono tiny">
+      <thead>
+        <tr><th>Timestamp (CDT)</th><th>User</th><th>Gateway</th><th>Status</th><th>Duration</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2025-08-11 08:12:09</td><td>SMITH, KAREN</td><td>HRG-VPN-GW02</td><td>Connected</td><td>00:31:22</td></tr>
+        <tr><td>2025-08-11 08:47:33</td><td>LEE, ADRIAN</td><td>HRG-VPN-GW01</td><td>Connected</td><td>00:12:40</td></tr>
+        <tr><td>2025-08-11 09:03:51</td><td>WARD, EVELYN</td><td>HRG-VPN-DR01</td><td>Connected</td><td>00:44:18</td></tr>
+        <tr><td>2025-08-11 10:22:04</td><td>CHAN, NOLAN</td><td>HRG-VPN-GW02</td><td>Connected</td><td>00:06:55</td></tr>
+        <tr><td>2025-08-11 12:01:12</td><td>OPERATIONS-SVC</td><td>HRG-VPN-GW01</td><td>Service</td><td>00:02:10</td></tr>
+        <tr><td>2025-08-11 13:14:47</td><td>FINANCE-ARCH</td><td>HRG-VPN-GW01</td><td>Service</td><td>00:03:42</td></tr>
+        <tr><td>2025-08-11 15:20:39</td><td>RECEPTION, L.</td><td>HRG-VPN-GW02</td><td>Failed</td><td>—</td></tr>
+        <tr><td>2025-08-11 16:03:25</td><td>GREER, JONATHAN</td><td>HRG-VPN-EXT</td><td>Connected</td><td>00:18:03</td></tr>
+        <tr><td>2025-08-11 17:11:14</td><td>SYS-BACKUP</td><td>HRG-VPN-GW01</td><td>Service</td><td>00:05:00</td></tr>
+        <tr><td>2025-08-11 18:42:58</td><td>WARD, EVELYN</td><td>HRG-VPN-GW02</td><td>Connected</td><td>00:07:29</td></tr>
+        <tr><td>2025-08-11 19:05:44</td><td>CHAN, NOLAN</td><td>HRG-VPN-GW02</td><td>Connected</td><td>00:10:14</td></tr>
+        <!-- Subtle clue: Cross + HRG-VPN-GW01 during TOD window -->
+        <tr><td><strong>2025-08-11 21:58:44</strong></td><td><strong>CROSS, DANIEL</strong></td><td><strong>HRG-VPN-GW01</strong></td><td><strong>Connected</strong></td><td><strong>00:12:04</strong></td></tr>
+        <tr><td>2025-08-11 22:21:10</td><td>OPERATIONS-SVC</td><td>HRG-VPN-GW01</td><td>Service</td><td>00:01:12</td></tr>
+        <tr><td>2025-08-11 22:55:39</td><td>SMITH, KAREN</td><td>HRG-VPN-GW02</td><td>Connected</td><td>00:05:40</td></tr>
+        <tr><td>2025-08-11 23:07:50</td><td>FINANCE-ARCH</td><td>HRG-VPN-GW01</td><td>Service</td><td>00:02:56</td></tr>
+        <tr><td>2025-08-10 07:41:03</td><td>SYS-BACKUP</td><td>HRG-VPN-GW01</td><td>Service</td><td>00:05:00</td></tr>
+        <tr><td>2025-08-10 12:57:22</td><td>RECEPTION, L.</td><td>HRG-VPN-GW02</td><td>Connected</td><td>00:08:11</td></tr>
+        <tr><td>2025-08-10 19:12:30</td><td>WARD, EVELYN</td><td>HRG-VPN-DR01</td><td>Connected</td><td>00:11:38</td></tr>
+        <tr><td>2025-08-09 09:18:09</td><td>SMITH, KAREN</td><td>HRG-VPN-GW02</td><td>Connected</td><td>00:23:07</td></tr>
+        <tr><td>2025-08-09 21:03:11</td><td>SYS-BACKUP</td><td>HRG-VPN-GW01</td><td>Service</td><td>00:05:00</td></tr>
+      </tbody>
+    </table>
+    <div class="tiny mt8 mono">Export: IT-Sec/RemoteAccess-LOG-2025-08-12 • md5: a7f2c3d1… (truncated)</div>
+  </section>
+
+  <!-- 18. CALL RECORDS (COMBINED) -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">CALL DETAIL RECORD — LAST 72 HRS (COMBINED)</h2><div class="badge mono">BPS-25-0911-CDR</div></div>
+    <div class="rule"></div>
+    <table class="mono tiny">
+      <thead><tr><th>#</th><th>Date</th><th>Time</th><th>From</th><th>To</th><th>Dur.</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>2025-08-11</td><td>21:14:48</td><td>204-555-0102 (D. Cross)</td><td>204-555-0133 (MH)</td><td>00:02:11</td><td>Voice</td><td>Incoming</td></tr>
+        <tr><td>2</td><td>2025-08-11</td><td>21:07:12</td><td>204-555-0133 (MH)</td><td>204-555-0102 (D. Cross)</td><td>00:01:04</td><td>Voice</td><td>Outgoing</td></tr>
+        <tr><td>3</td><td>2025-08-11</td><td>20:22:31</td><td>204-555-0133 (MH)</td><td>204-555-0194 (E. Ward)</td><td>00:03:39</td><td>Voice</td><td>Outgoing</td></tr>
+        <tr><td>4</td><td>2025-08-11</td><td>19:52:05</td><td>Spam</td><td>204-555-0133 (MH)</td><td>00:00</td><td>Missed</td><td>—</td></tr>
+        <tr><td>5</td><td>2025-08-11</td><td>18:31:44</td><td>204-555-0133 (MH)</td><td>Coffee Shop</td><td>00:00:35</td><td>Voice</td><td>Pickup order</td></tr>
+        <tr><td>6</td><td>2025-08-10</td><td>22:41:03</td><td>Friend</td><td>204-555-0133 (MH)</td><td>00:04:02</td><td>Voice</td><td>—</td></tr>
+        <tr><td>7</td><td>2025-08-10</td><td>19:12:55</td><td>204-555-0133 (MH)</td><td>Lawyer (J. Greer)</td><td>00:06:14</td><td>Voice</td><td>—</td></tr>
+        <tr><td>8</td><td>2025-08-10</td><td>16:03:12</td><td>204-555-0133 (MH)</td><td>Pharmacy</td><td>00:01:18</td><td>Voice</td><td>Refill</td></tr>
+        <tr><td>9</td><td>2025-08-10</td><td>11:18:24</td><td>204-555-0133 (MH)</td><td>Unknown</td><td>00:00:42</td><td>Voice</td><td>—</td></tr>
+        <tr><td>10</td><td>2025-08-09</td><td>21:33:47</td><td>Unknown</td><td>204-555-0133 (MH)</td><td>00:00</td><td>Missed</td><td>—</td></tr>
+        <tr><td>11</td><td>2025-08-09</td><td>20:01:19</td><td>204-555-0133 (MH)</td><td>Restaurant</td><td>00:00:52</td><td>Voice</td><td>Reservation</td></tr>
+        <tr><td>12</td><td>2025-08-09</td><td>18:22:10</td><td>204-555-0133 (MH)</td><td>204-555-0102 (D. Cross)</td><td>00:01:11</td><td>Voice</td><td>Outgoing</td></tr>
+        <tr><td>13</td><td>2025-08-09</td><td>17:58:39</td><td>204-555-0133 (MH)</td><td>Lisa Myles</td><td>00:02:23</td><td>Voice</td><td>Outgoing</td></tr>
+      </tbody>
+    </table>
+    <div class="small mt8">Subscriber: 204-555-0133 (Halden, Martin). Times local (CDT).</div>
+  </section>
+
+  <!-- 19. BANK TRANSACTION SUMMARY -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">BANK TRANSACTION SUMMARY — PRIOR 7 DAYS</h2><div class="badge mono">BPS-25-0911-BTS</div></div>
+    <div class="rule"></div>
+    <table class="tiny mono">
+      <thead><tr><th>Date</th><th>Vendor</th><th>Amount</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>2025-08-11</td><td>Coffee Roasters</td><td>$7.85</td><td>Debit</td><td>—</td></tr>
+        <tr><td>2025-08-11</td><td>Fuel Station</td><td>$64.12</td><td>Debit</td><td>—</td></tr>
+        <tr><td>2025-08-10</td><td>Grocery</td><td>$118.44</td><td>Debit</td><td>—</td></tr>
+        <tr><td>2025-08-09</td><td>Restaurant</td><td>$92.30</td><td>Credit Card</td><td>Dinner for two</td></tr>
+        <tr><td>2025-08-08</td><td>North Prairie Systems</td><td>$0.00</td><td>Note</td><td><em>Reference appears only in email header cache (see DF)</em></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 20. MEDIA ARTICLE -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">MEDIA CLIPPING — Brandon Daily Times</h2><div class="badge mono">BPS-25-0911-PR</div></div>
+    <div class="rule"></div>
+    <div class="two-col small">
+      <strong>Philanthropist’s Death Ruled Suicide Amid Financial Questions</strong><br/>
+      Police say the death of businessman Martin Halden appears to be a suicide. Sources indicate investigators reviewed a note recovered at the scene. CFO Evelyn Ward declined to comment pending the conclusion of separate financial reviews.
+    </div>
+  </section>
+
+  <!-- 21. ADMIN CLOSURE -->
+  <section class="page">
+    <div class="badge" style="position:absolute; top:20px; right:20px;">CLOSED — SUICIDE</div>
+    <h2 class="cap">ADMINISTRATIVE CASE CLOSURE MEMO</h2>
+    <div class="rule"></div>
+    <div class="small">
+      Case BPS-25-0911 closed by Det. Brooks on 2025-08-18. No further investigative leads developed. Property retained per retention schedule. Any supplemental reports to be attached as BPS-25-0911-SUP with supervisor approval.
+    </div>
+  </section>
+
+  <!-- 22. PHOTO INDEX -->
+  <section class="page">
+    <div class="flex space"><h2 class="cap">PHOTO INDEX — FULL-PAGE INSERTS</h2><div class="badge mono">BPS-25-0911-PH</div></div>
+    <div class="rule"></div>
+    <ol class="small">
+      <li>Photo #01 — Study, wide establishing (markers visible).</li>
+      <li>Photo #02 — Desk, midrange (bottle, glass, laptop).</li>
+      <li>Photo #03 — Revolver in right hand, serial partially visible.</li>
+      <li>Photo #04 — Torn note fragments arranged with scale.</li>
+      <li>Photo #05 — GSR swab documentation (left hand).</li>
+      <li>Photo #06 — ME: lividity documentation (clinical).</li>
+      <li>Photo #07 — Exterior of residence, north elevation.</li>
+      <li>Photo #08 — Entryway and hallway to study.</li>
+    </ol>
+    <div class="tiny">Insert each as a separate printed page after this index.</div>
+  </section>
 
 </body>
 </html>
