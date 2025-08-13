@@ -1,18 +1,38 @@
-body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; line-height: 1.25; color: #000; }
-.grid { display: grid; grid-gap: 8px; }
-.two-col { display:flex; justify-content:space-between; }
-.flex { display:flex; }
+@page { size: Letter; margin: 0.6in; }
+:root {
+  --ink:#111;
+  --muted:#444;
+  --line:#888;
+  --accent:#0a3e91;
+}
+html, body { height:100%; }
+body {
+  color: var(--ink);
+  font-family: "Times New Roman", Times, serif;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+h1, h2, h3 { margin:0; }
+h1 { text-transform:uppercase; letter-spacing:.04em; }
+.cap { letter-spacing:.04em; text-transform:uppercase; }
+.grid { display:grid; gap:8px; }
+.two-col { display:flex; justify-content:space-between; gap:8px; }
+.flex { display:flex; gap:8px; align-items:center; }
 .mt-2 { margin-top:1rem; }
 .mb-2 { margin-bottom:1rem; }
-.small { font-size:0.8rem; }
-.muted { color:#555; }
+.small { font-size:12px; color:var(--muted); }
+.muted { color:var(--muted); }
+.mono { font-family:"Courier New", Courier, monospace; }
+.box { border:1px solid var(--line); padding:8px; border-radius:2px; }
+.doc { page-break-after:always; position:relative; padding:16px; margin:16px auto; max-width:8.5in; background:#fff; }
+.doc-header { padding-bottom:8px; border-bottom:2px solid var(--accent); margin-bottom:12px; }
+.doc-footer { padding-top:8px; border-top:1px solid var(--line); margin-top:16px; }
+.rule { height:2px; background:var(--accent); margin:6px 0 12px; }
+.table { width:100%; border-collapse:collapse; }
+.table th, .table td { border:1px solid var(--line); padding:6px; font-size:12px; vertical-align:top; }
+.table thead th { background:#f4f4f4; text-transform:uppercase; letter-spacing:.02em; }
+.redact { background:#000 !important; color:#000 !important; border:1px solid #000 !important; padding:0 .25em; }
 .form .row { display:flex; margin-bottom:4px; }
 .form .label { width:30%; font-weight:bold; }
 .form .value { flex:1; }
-.table { width:100%; border-collapse:collapse; }
-.table th,.table td { border:1px solid #000 !important; padding:6px; }
-.table thead th { text-transform:uppercase; letter-spacing:.02em; }
-.doc { border:2px solid #000 !important; padding:16px; margin:16px auto; max-width:8.5in; background:#fff; }
-.doc-header,.doc-footer { padding-bottom:8px; border-bottom:1px solid #000; }
-.doc-footer { border-top:1px solid #000; border-bottom:0; }
-.redact { background:#000 !important; color:#000 !important; border:1px solid #000 !important; padding:0 .25em; }
+.page-break { page-break-after:always; }
