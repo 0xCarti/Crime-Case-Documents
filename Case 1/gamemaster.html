@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Game Master File — Case 1 (and Series Overview)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<style>
+  @page { size: Letter; margin: 0.6in; }
+  body { font-family: Georgia, serif; color:#1a1a1a; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  h1,h2,h3{ margin:0 0 8px 0; }
+  .page{ page-break-after:always; }
+  .small{ font-size:12px; color:#555; }
+  ul{ margin:6px 0 12px 18px; }
+  .card{ border:1px solid #bbb; padding:10px; border-radius:6px; margin:8px 0; }
+  .grid{ display:grid; gap:10px; grid-template-columns: 1fr 1fr; }
+  .mono{ font-family:"Courier New", Courier, monospace; font-size:12px; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <h1>Game Master Brief — Case 1 & Series Overview</h1>
+  <p class="small">Confidential. Do not include in player folders.</p>
+  <h2>Premise</h2>
+  <p>Players are private investigators hired by a third party after police close multiple seemingly unrelated cases. Their goal is to link the cases, establish motive and method, and identify the hidden culprit. The true culprit appears in the documents but is not labeled as a suspect.</p>
+
+  <h2>Series at a Glance (4–5 Cases)</h2>
+  <ul>
+    <li><strong>Case 1 — Halden Death:</strong> Apparent suicide of real estate magnate Martin Halden. Actually a murder staged by CTO <em>Daniel Cross</em>, motivated by exposure of a fraud scheme (archival hardware & off-books data).</li>
+    <li><strong>Case 2 — Evergreen Antiques Burglary:</strong> Mid-level theft with odd item selection. Connects via resale channel and a DVR gap.</li>
+    <li><strong>Case 3 — Warehouse Arson (Fraud Cover-up):</strong> Fire destroys storage unit B-17 holding HRG archives. Insurance and IT work orders link to Case 1 vendor trail.</li>
+    <li><strong>Case 4 — Side Case / Red Herring:</strong> Looks connected but mostly noise; contains one or two real signals that tie back to Cross (e.g., shared VPN endpoint, shared phone contact).</li>
+  </ul>
+
+  <h2>Win Condition</h2>
+  <p>Players present a coherent hypothesis (method + motive + linkage across cases) and confidently open the envelope naming the culprit: <strong>Daniel Cross</strong>.</p>
+</section>
+
+<section class="page">
+  <h2>Case 1 — Organization Map</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Folder Sections (as given to players)</h3>
+      <ul>
+        <li>Administrative & Incident Reports</li>
+        <li>Forensics & Scene Docs</li>
+        <li>Witness & Interview Records</li>
+        <li>Digital & Call Data</li>
+        <li>Media & Closure</li>
+        <li>Photo Index (separate full-page photos)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Key People</h3>
+      <ul>
+        <li><strong>Martin Halden</strong> — Victim, HRG owner.</li>
+        <li><strong>Evelyn Ward</strong> — CFO; prints on cylinder explainable.</li>
+        <li><strong>Daniel Cross</strong> — CTO; staged suicide; remote session + data purge.</li>
+        <li><strong>Maria Lopez</strong> — Housekeeper; door unlocked anomaly.</li>
+        <li><strong>R. Hathaway</strong> — Neighbor; heard “crack,” car door.</li>
+        <li><strong>Jonathan Greer</strong> — Lawyer; referenced by victim.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Evidence Index (Case 1)</h3>
+    <ul>
+      <li><em>Weapon & Ballistics:</em> .38 revolver; muzzle-to-target 0–3 cm; prints inconclusive on grip; Ward partial on cylinder (innocuous).</li>
+      <li><em>GSR:</em> Positive on <strong>left</strong> hand dorsum; inconsistent with right-hand suicide staging.</li>
+      <li><em>Autopsy/Tox:</em> Low BAC; trace benzo below threshold (possible pre-sedation).</li>
+      <li><em>Digital:</em> VPN session 21:58–22:03; 4.2 GB purge; vendor “North Prairie Systems” in headers.</li>
+      <li><em>Call Log:</em> Multiple calls with Cross; call to lawyer; spam/ordinary calls as noise.</li>
+      <li><em>Paper Trail:</em> Invoice, check stub, ledger entries referencing North Prairie; IT work order signed by Cross.</li>
+      <li><em>Scene:</em> Torn note fragments; door unlocked; threshold scuff; safe keypad wiped.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Clue Map (GM Eyes Only)</h3>
+    <ul>
+      <li>Real tells: GSR left-hand heavy; VPN session overlapping TOD; deletions immediately prior to discovery; invoice trail; access logs with Cross at server room.</li>
+      <li>Red herrings: Paint receipt (unrelated), neighbor misattributes gunshot to backfire, media article framing suicide, charity disbursement noise.</li>
+      <li>Pacing: Most strong clues are split between Forensics, Digital, and Financial inserts.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="page">
+  <h2>Cross-Case Linkage (for GM)</h2>
+  <ul>
+    <li><strong>Vendor Thread:</strong> “North Prairie Systems” recurs in Case 1 financials and Case 3 warehouse equipment manifests.</li>
+    <li><strong>Access/Timing Thread:</strong> DVR gaps in Case 2 align with times Cross is remoted in (same VPN gateway string shows up).</li>
+    <li><strong>Phone/Contact Thread:</strong> One common contact appears across CDRs (burner or store number) — reveal in later cases.</li>
+  </ul>
+
+  <h3>What Players Might Miss</h3>
+  <ul>
+    <li>GSR handedness mismatch if they don’t compare to right/left dominance.</li>
+    <li>Header cache line in Digital Forensics pointing to vendor.</li>
+    <li>Ledger “capitalization adjustment” matching invoice total.</li>
+  </ul>
+
+  <h3>Failsafes / Hints You Can Offer</h3>
+  <ul>
+    <li>“Compare the hands and the residue.”</li>
+    <li>“Follow the vendor names across documents.”</li>
+    <li>“Why would someone wipe a keypad they own?”</li>
+  </ul>
+</section>
+
+<section class="page">
+  <h2>Production Checklist (Case 1)</h2>
+  <ul>
+    <li>Print Case File 1 (~20 pages) single-sided.</li>
+    <li>Print “Printable Inserts” pack; rough-up, fold, add coffee ring; photograph for Photo Index items as needed.</li>
+    <li>Insert your Sora-generated photos (or staged photos) as full-page prints after the Photo Index.</li>
+    <li>Seal final answer envelope labeled “Solution — Open When Ready.”</li>
+  </ul>
+
+  <h2>Answer Envelope — Canon Solution</h2>
+  <p class="mono">Culprit: DANIEL CROSS (CTO).<br/>Method: Staged suicide after remote session & data purge; tampered prints; left-hand GSR inconsistency.<br/>Motive: Exposure of fraud trail (archive hardware + off-books data) tying him to vendor kickbacks.</p>
+</section>
+
+</body>
+</html>

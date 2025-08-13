@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Case 1 — Printable Inserts (Financial Docs & Note Templates)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<style>
+  @page { size: Letter; margin: 0.6in; }
+  :root { --ink:#1a1a1a; --muted:#555; --line:#8a8a8a; --accent:#103a8c; --grid:#e9ecef; }
+  body { font-family:"Times New Roman", Times, serif; color:var(--ink); -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .page { page-break-after:always; position:relative; }
+  .cap { letter-spacing:.04em; }
+  .rule { height:2px; background:var(--accent); margin:6px 0 14px; }
+  .small { font-size:12px; color:var(--muted); }
+  .mono { font-family:"Courier New", Courier, monospace; }
+  .grid { display:grid; gap:8px; }
+  .box { border:1px solid var(--line); padding:8px; border-radius:2px; }
+  table { width:100%; border-collapse:collapse; }
+  th, td { border:1px solid var(--line); padding:6px; font-size:12px; vertical-align:top; }
+  th { background:#f4f5f6; }
+  .badge { font-size:12px; border:1px solid var(--line); padding:2px 6px; border-radius:3px; }
+  /* ruled note paper lines WITHOUT crossing table cells */
+  .ruled { position:relative; }
+  .ruled .lined { background: repeating-linear-gradient(180deg, #ffffff, #ffffff 26px, #eef6ff 26px, #eef6ff 27px); padding:12px; }
+  .ruled .margin { position:absolute; left:54px; top:0; bottom:0; width:1px; background:#d6e0ff; }
+  .scribble { font-family:"Brush Script MT", cursive; font-size:20px; line-height:28px; color:#222; }
+  /* aging effects */
+  .coffee::after { content:""; position:absolute; width:120px; height:120px; right:10%; top:20%; border:5px solid rgba(92,60,28,0.18); border-radius:50%; transform:rotate(12deg); filter:blur(.2px); }
+  .smudge::before { content:""; position:absolute; width:180px; height:40px; left:12%; bottom:14%; background: radial-gradient(ellipse at center, rgba(0,0,0,.07), rgba(0,0,0,0) 70%); transform:rotate(-8deg); }
+  .tear-guide { border-top:2px dashed #bdbdbd; margin:12px 0 0; }
+  .mt12{margin-top:12px}
+</style>
+</head>
+<body>
+
+<!-- Bank Statement -->
+<section class="page coffee">
+  <div class="cap" style="font-weight:700;font-size:20px;">NORTHERN CREDIT UNION</div>
+  <div class="small">Monthly Statement • 1234 Main St, Brandon MB • (204) 555-0142</div>
+  <div class="rule"></div>
+  <div class="grid" style="grid-template-columns: 2fr 1fr 1fr;">
+    <div class="box"><strong>Name/Address:</strong><br/>HALDEN, Martin<br/>55 Waverly Ct<br/>Brandon, MB R7A 0A0</div>
+    <div class="box"><strong>Period:</strong><br/>2025-08-05 to 2025-08-11</div>
+    <div class="box"><strong>Account Type:</strong><br/>Personal Chequing</div>
+  </div>
+  <table class="mt12 mono">
+    <thead>
+      <tr><th>Date</th><th>Description</th><th>Reference</th><th>Debit</th><th>Credit</th><th>Balance</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2025-08-11</td><td>Coffee Roasters</td><td>POS 7th St</td><td>$7.85</td><td>—</td><td>$12,114.03</td></tr>
+      <tr><td>2025-08-11</td><td>Fuel Station</td><td>POS Richmond</td><td>$64.12</td><td>—</td><td>$12,049.91</td></tr>
+      <tr><td>2025-08-10</td><td>Grocery Mart</td><td>POS Victoria</td><td>$118.44</td><td>—</td><td>$12,168.35</td></tr>
+      <tr><td>2025-08-09</td><td>Restaurant — Dinner</td><td>POS Rosser</td><td>$92.30</td><td>—</td><td>$12,286.79</td></tr>
+      <tr><td>2025-08-08</td><td><em>Note in mail: "North Prairie Systems" (see email header)</em></td><td>—</td><td>—</td><td>—</td><td>$12,379.09</td></tr>
+    </tbody>
+  </table>
+  <div class="small mt12">Statement reproduced from e-banking export; minor rounding differences may occur.</div>
+  <div class="tear-guide"></div>
+</section>
+
+<!-- Vendor Invoice -->
+<section class="page smudge">
+  <div class="cap" style="font-weight:700;font-size:20px;">NORTH PRAIRIE SYSTEMS — INVOICE</div>
+  <div class="small">208 Tech Park Blvd, Brandon MB • GST 78291-4091</div>
+  <div class="rule"></div>
+  <div class="grid" style="grid-template-columns: 2fr 1fr 1fr;">
+    <div class="box"><strong>Bill To:</strong><br/>Halden Realty Group<br/>240 Broad Ave, Suite 900<br/>Brandon, MB R7B 2K5</div>
+    <div class="box"><strong>Date:</strong><br/>2025-05-14</div>
+    <div class="box"><strong>PO:</strong><br/>HRG-IT-2311</div>
+  </div>
+  <table class="mt12 mono">
+    <thead>
+      <tr><th>Qty</th><th>Description</th><th>Unit</th><th>Unit Price</th><th>Line Total</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>6</td><td>Rack-mount network storage chassis — Model NR-24</td><td>ea</td><td>$1,850.00</td><td>$11,100.00</td></tr>
+      <tr><td>6</td><td>Drive sled kits — NR-24 series</td><td>ea</td><td>$135.00</td><td>$810.00</td></tr>
+      <tr><td>1</td><td>Onsite initialization & archival transfer</td><td>svc</td><td>$1,250.00</td><td>$1,250.00</td></tr>
+      <tr><td colspan="4" style="text-align:right"><strong>Subtotal</strong></td><td>$13,160.00</td></tr>
+      <tr><td colspan="4" style="text-align:right">GST (5%)</td><td>$658.00</td></tr>
+      <tr><td colspan="4" style="text-align:right"><strong>Total Due</strong></td><td><strong>$13,818.00</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="small mt12">Authorized by: <span class="mono">D. Cross</span> • Terms: Net 30</div>
+  <div class="tear-guide"></div>
+</section>
+
+<!-- General Ledger (lines behind content only) -->
+<section class="page ruled">
+  <div class="margin"></div>
+  <div class="cap" style="font-weight:700;font-size:18px;">GENERAL LEGER — DETAIL</div>
+  <div class="rule"></div>
+  <div class="lined">
+    <table class="mono">
+      <thead><tr><th>Date</th><th>Doc #</th><th>Description</th><th>Debit</th><th>Credit</th><th>Balance</th></tr></thead>
+      <tbody>
+        <tr><td>2025-05-15</td><td>JE-1129</td><td>Transfer to vendor — <strong>North Prairie Systems</strong></td><td>$25,000.00</td><td>—</td><td>$---</td></tr>
+        <tr><td>2025-05-18</td><td>ACH-4471</td><td>Community grants disbursement</td><td>—</td><td>$12,500.00</td><td>$---</td></tr>
+        <tr><td>2025-06-02</td><td>JE-1187</td><td>Adjustment — archival hardware capitalization</td><td>$13,818.00</td><td>—</td><td>$---</td></tr>
+        <tr><td>2025-06-10</td><td>ACH-4503</td><td>Vendor refund — restocking</td><td>—</td><td>$2,100.00</td><td>$---</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="small mt12">Exported from accounting; header/footer removed.</div>
+</section>
+
+<!-- IT Work Order -->
+<section class="page">
+  <div class="cap" style="font-weight:700;font-size:18px;">WORK ORDER — ARCHIVE RACK INSTALL / SERVICE</div>
+  <div class="rule"></div>
+  <div class="grid" style="grid-template-columns: 2fr 1fr 1fr;">
+    <div class="box"><strong>Client:</strong><br/>Halden Realty Group — Records Storage<br/>Brandon Community Storage, Unit B-17</div>
+    <div class="box"><strong>Date Opened:</strong><br/>2025-06-01</div>
+    <div class="box"><strong>Tech:</strong><br/><span class="mono">D. Cross</span></div>
+  </div>
+  <table class="mt12 mono">
+    <thead><tr><th>Step</th><th>Task</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Install NR-24 chassis + sleds</td><td>Mount top rack; verify airflow</td></tr>
+      <tr><td>2</td><td>Migrate charity ledgers to archive</td><td>Night job; confirm checksum</td></tr>
+      <tr><td>3</td><td>Decommission old NAS</td><td>Tag for recycling / disposal</td></tr>
+      <tr><td>4</td><td>Final audit</td><td>Sign-off required</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Handwritten Fragments Template (cursive) -->
+<section class="page ruled">
+  <div class="margin"></div>
+  <div class="cap" style="font-weight:700;font-size:18px;">HANDWRITTEN PAGE — FRAGMENTS TEMPLATE</div>
+  <div class="rule"></div>
+  <div class="lined">
+    <div class="scribble" style="max-width:7.5in;">
+      I can’t make the 9am meeting — will call later…<br/>
+      The figures don’t align with the archive transfer. Check the vendor ref.<br/>
+      "North Prairie" shows up in the header cache. Who authorized?<br/>
+      We can’t keep postponing this. Talk to J.G. about next steps.<br/>
+      — M.
+    </div>
+  </div>
+  <div class="small mt12">Print and hand-trace in your own writing, then tear into irregular pieces for photo #04. Keep content neutral.</div>
+</section>
+
+<!-- Email Header -->
+<section class="page">
+  <div class="cap" style="font-weight:700;font-size:18px;">EMAIL PRINT — HEADER ONLY</div>
+  <div class="rule"></div>
+  <table class="mono">
+    <tbody>
+      <tr><th style="width:160px">From:</th><td>Martin Halden &lt;mhalden@hrg.ca&gt;</td></tr>
+      <tr><th>To:</th><td>Daniel Cross &lt;dcross@hrg.ca&gt;</td></tr>
+      <tr><th>Date:</th><td>Sun, 10 Aug 2025 22:31:09 -0500</td></tr>
+      <tr><th>Subject:</th><td>Invoices — need to talk</td></tr>
+      <tr><th>References:</th><td>vendor: <strong>North Prairie Systems</strong></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Check Stub -->
+<section class="page coffee">
+  <div class="cap" style="font-weight:700;font-size:18px;">ACCOUNTS PAYABLE — CHECK STUB</div>
+  <div class="rule"></div>
+  <table class="mono">
+    <tbody>
+      <tr><th style="width:160px">Payee</th><td>North Prairie Systems</td></tr>
+      <tr><th>Amount</th><td>$13,818.00</td></tr>
+      <tr><th>Date</th><td>2025-06-03</td></tr>
+      <tr><th>Memo</th><td>Archive rack + services / WO HRG-SRV-0921</td></tr>
+    </tbody>
+  </table>
+  <div class="tear-guide"></div>
+</section>
+
+<!-- Paint Receipt (red herring) -->
+<section class="page smudge">
+  <div class="cap" style="font-weight:700;font-size:18px;">HENDERSON PAINT & SUPPLY — RECEIPT</div>
+  <div class="rule"></div>
+  <table class="mono">
+    <thead><tr><th>Qty</th><th>Item</th><th>Unit</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr><td>3</td><td>Aerosol Paint — "CityLine Grey" (400ml)</td><td>$11.99</td><td>$35.97</td></tr>
+      <tr><td>1</td><td>Nitrile Gloves (L) 100ct</td><td>$14.99</td><td>$14.99</td></tr>
+      <tr><td colspan="3" style="text-align:right">SUBTOTAL</td><td>$50.96</td></tr>
+      <tr><td colspan="3" style="text-align:right">GST (5%)</td><td>$2.55</td></tr>
+      <tr><td colspan="3" style="text-align:right"><strong>PAID</strong> (Company Card — Vickers)</td><td><strong>$53.51</strong></td></tr>
+    </tbody>
+  </table>
+  <div class="small mt12">Cashier: L. Ng • 2025-06-03 16:42 • Terminal: 03</div>
+</section>
+
+<!-- Access Log -->
+<section class="page">
+  <div class="cap" style="font-weight:700;font-size:18px;">BUILDING ACCESS LOG — SERVER ROOM</div>
+  <div class="rule"></div>
+  <table class="mono">
+    <thead><tr><th>Date</th><th>Time</th><th>Badge ID</th><th>Name</th><th>Door</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>2025-06-01</td><td>18:12:07</td><td>AC-0198</td><td>Cross, Daniel</td><td>SRV-01</td><td>Granted</td></tr>
+      <tr><td>2025-06-01</td><td>18:54:29</td><td>AC-0198</td><td>Cross, Daniel</td><td>SRV-01</td><td>Granted</td></tr>
+      <tr><td>2025-08-09</td><td>21:03:11</td><td>AC-0198</td><td>Cross, Daniel</td><td>SRV-01</td><td>Granted</td></tr>
+      <tr><td>2025-08-09</td><td>21:47:52</td><td>AC-0198</td><td>Cross, Daniel</td><td>SRV-01</td><td>Granted</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Evidence Labels -->
+<section class="page">
+  <div class="cap" style="font-weight:700;font-size:18px;">PROPERTY / EVIDENCE — LABELS</div>
+  <div class="rule"></div>
+  <table class="mono">
+    <thead><tr><th>Case #</th><th>Item #</th><th>Description</th><th>Date</th><th>Officer</th><th>Location</th></tr></thead>
+    <tbody>
+      <tr><td>BPS-25-0911</td><td>001</td><td>.38 Revolver SN 2F71-8891</td><td>2025-08-11</td><td>#417</td><td>Desk area</td></tr>
+      <tr><td>BPS-25-0911</td><td>003</td><td>Torn paper fragments (8 pcs)</td><td>2025-08-11</td><td>#417</td><td>Wastebasket</td></tr>
+      <tr><td>BPS-25-0911</td><td>004</td><td>Laptop 15" silver</td><td>2025-08-11</td><td>#417</td><td>Desktop</td></tr>
+      <tr><td>BPS-25-0911</td><td>008</td><td>Desk blotter (blood spatter)</td><td>2025-08-11</td><td>#417</td><td>Desktop</td></tr>
+    </tbody>
+  </table>
+  <div class="small mt12">Tip: Print on sticker paper; hand-write initials for extra realism.</div>
+</section>
+
+</body>
+</html>
