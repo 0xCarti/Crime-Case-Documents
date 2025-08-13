@@ -1,0 +1,8 @@
+@page { size: letter; margin: 0.5in; }
+@media print {
+  .doc { box-shadow:none; }
+  .page-break { page-break-after: always; }
+  header, footer { position: fixed; }
+  .no-print { display:none !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
